@@ -3,6 +3,6 @@ const   fs = require("fs"),
 
 fs.readdirSync(__dirname + '/').forEach( file => {
     if (file === 'index.js') return
-    let name = file.replace(controllerExtension, '') + "Controller"
+    let name = file.replace(controllerExtension, "Controller") 
     exports[name] = require('./' + file)
 })

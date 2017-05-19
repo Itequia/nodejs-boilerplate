@@ -1,5 +1,4 @@
-const   dotenv = require('dotenv'),
-        express = require('express'),
+const   express = require('express'),
         path = require('path'),
         cookieParser = require('cookie-parser'),
         bodyParser = require('body-parser'),
@@ -19,8 +18,6 @@ class Server {
 
     init () {
         this.app = express()
-        // Adding global config vars
-        dotenv.config()
         // Adding Gzip
         this.app.use(compress())
         // Adding parsers
