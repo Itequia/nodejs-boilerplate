@@ -1,13 +1,14 @@
 class Card {
 
-    constructor(id, value, suit, deck) {
-        Object.assign(this, { 
-            id, 
-            value, 
-            suit, 
-            deck 
+    define (db) {
+        db.define("card", { 
+            value: String
         })
+    }
+
+    associate (db) {
+        db.models.card.hasOne("deck", db.models.deck)
     }
 }
 
-module.exports = Card
+module.exports = new Card ()

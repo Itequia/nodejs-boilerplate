@@ -1,26 +1,26 @@
-const mockSeed = require("./seeds/mock-seed")
+const orm = require("orm")
+
+const models = require("../models")
 
 class Dbcontext {
 
     constructor () {
-        // Ideally this would connect to a DB and execute the seed methods
-        // We will mock the db by executing fake seeds that add mock data.
-        this.context = {
-            decks: mockSeed.decks,
-            cards: mockSeed.cards   
-        }
+        this.init()
     }
 
-    // This mocks an async get from a real database
-    get (entity, where = () => true) {
-         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                let result = this.context[entity] || []
-                result = result.filter(where)
-                if (result.length) resolve(result)
-                else reject("The entity does not exist.")
-            }, 1000)
-         })
+    init () {
+        orm.connect (process.env.DB_CONNECTION_STRING, (err, db) => {
+            if (err) return console.error(err)
+            console.log(" -- DATABASE CONNECTED SUCCESSFULLY -- ")
+
+            for(let model in models) models[model].define(db)
+            for(let model in models) models[model].associate(db)
+
+            db.sync(err => {
+                if (err) return console.error(err)
+                db.models.deck.create({ name: "Hello world!" }, err => err && console.error(err))
+            })
+        })
     }
 }
 

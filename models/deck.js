@@ -1,12 +1,13 @@
 class Deck {
-
-    constructor(id, name, cards = []) {
-        Object.assign(this, { 
-            id, 
-            name,
-            cards 
+    
+    define(db) {
+        db.define("deck", { 
+            name: String
         })
+    }
+
+    associate(db) {
     }
 }
 
-module.exports = Deck
+module.exports = new Deck ()
