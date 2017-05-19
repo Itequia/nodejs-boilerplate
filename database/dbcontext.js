@@ -15,11 +15,6 @@ class Dbcontext {
 
             for(let model in models) models[model].define(db)
             for(let model in models) models[model].associate(db)
-
-            db.sync(err => {
-                if (err) return console.error(err)
-                db.models.deck.create({ name: "Hello world!" }, err => err && console.error(err))
-            })
         })
     }
 }
