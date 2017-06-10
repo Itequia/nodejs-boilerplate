@@ -28,8 +28,8 @@ class Server {
         this.app.use(express.static(path.join(__dirname, 'public'), { maxAge: oneYearInMs }))
         // Adding API routes
         this.app.use('/api', router)
-        // Adding error handling
-        this.app.use( (req, res, next)  => httpResult.notFound(res) )
+        // Adding 404 error handling
+        this.app.use( (req, res)  => httpResult.notFound(res) )
     }
 
     start (port = 3000) {

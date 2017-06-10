@@ -48,10 +48,10 @@ class Dbcontext {
     /* 
         Executes ORM method using promises instead of the default callbacks 
     */
-    _executeAsPromise (method, model, where) {
+    _executeAsPromise (method, model, params) {
         return new Promise((resolve, reject) => {
             if(!this.db) reject("DB_ERROR")
-            this.db.models[model][method](where, (err, result) => {
+            this.db.models[model][method](params, (err, result) => {
                 if(err) reject(err)
                 else resolve(result)
             })

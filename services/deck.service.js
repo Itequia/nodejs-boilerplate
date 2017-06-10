@@ -2,21 +2,16 @@ let dbcontext = require('../database/dbcontext')
 
 class DeckService {
 
-    async getAll() {
-        try {
-            return await dbcontext.find("deck")
-        } catch (error) {
-            
-        }
+    async getAll () {
+        return await dbcontext.find("deck")
     }
 
-    async getSingle(id) {
-        try {
-            return await dbcontext.single("deck", id)
-        } 
-        catch (error) {
-            console.log(error)
-        }
+    async getSingle (id) {
+        return await dbcontext.single("deck", id)
+    }
+
+    async create (deck) {
+        return await dbcontext.create("deck", deck)
     }
 }
 

@@ -1,12 +1,12 @@
 class Deck {
     
-    define(db) {
+    define (db) {
         db.define("deck", { 
             name: String
         })
     }
 
-    associate(db) {
+    associate (db) {
     }
 }
 
